@@ -1,1 +1,31 @@
-<router-outlet></router-outlet>
+<header>
+<mat-toolbar>
+	<span>Advent of Code 2022</span>
+</mat-toolbar>
+</header>
+<main>
+	<form [formGroup]="form" class="form">
+		<mat-form-field>
+			<mat-label>Select puzzle</mat-label>
+			<mat-select [formControl]="form.controls.puzzle">
+				<mat-option *ngFor="let puzzleOption of puzzleOptions" [value]="puzzleOption.solver">{{ puzzleOption.label }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Select part</mat-label>
+			<mat-select [formControl]="form.controls.part">
+				<mat-option *ngFor="let partOption of partOptions" [value]="partOption.part">{{ partOption.label }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field class="full-size">
+			<mat-label>Enter puzzle input</mat-label>
+      <textarea matInput [formControl]="form.controls.input"></textarea>
+		</mat-form-field>
+	</form>
+</main>
+<footer>
+<mat-toolbar>
+  <button mat-flat-button (click)="solve()">Solve!</button>
+	<span>Answer: {{ last_solution }}</span>
+</mat-toolbar>
+</footer>
