@@ -26,6 +26,13 @@
 <footer>
 <mat-toolbar>
   <button mat-flat-button (click)="solve()">Solve!</button>
-	<span>Answer: {{ last_solution }}</span>
+  <span *ngIf="solver.solverStatus$ | async as solverStatus">
+    <ng-container *ngIf="solverStatus.answer; else solving">
+      Answer to {{ solverStatus.solving }}: {{ solverStatus.answer }}
+    </ng-container>
+    <ng-template #solving>
+      Solving {{ solverStatus.solving }}...
+    </ng-template>
+  </span>
 </mat-toolbar>
 </footer>

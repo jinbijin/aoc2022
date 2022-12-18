@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -9,6 +9,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
     import {MatButtonModule} from '@angular/material/button';
+import { PuzzleSolver } from './puzzle-solver.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: (solver: PuzzleSolver) => () => solver.initialize(), deps: [PuzzleSolver], multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
