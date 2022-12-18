@@ -24,14 +24,16 @@
 	</form>
 </main>
 <footer>
-<mat-toolbar>
-  <button mat-flat-button (click)="solve()">Solve!</button>
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="solve()" aria-label="Solve">
+    <mat-icon>play_arrow</mat-icon>
+  </button>
   <span *ngIf="solver.solverStatus$ | async as solverStatus">
     <ng-container *ngIf="solverStatus.answer; else solving">
-      Answer to {{ solverStatus.solving }}: {{ solverStatus.answer }}
+      Answer to {{ solverStatus.solving.puzzle | puzzle }}, {{ solverStatus.solving.part | puzzlePart }}: {{ solverStatus.answer }}
     </ng-container>
     <ng-template #solving>
-      Solving {{ solverStatus.solving }}...
+      Solving {{ solverStatus.solving.puzzle | puzzle }}, {{ solverStatus.solving.part | puzzlePart }}...
     </ng-template>
   </span>
 </mat-toolbar>

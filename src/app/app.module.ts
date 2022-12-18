@@ -8,8 +8,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-    import {MatButtonModule} from '@angular/material/button';
+  import {MatButtonModule} from '@angular/material/button';
+  import {MatIconModule} from '@angular/material/icon';
 import { PuzzleSolver } from './puzzle-solver.service';
+import { PuzzlePipe } from './puzzle.pipe';
+import { PuzzlePartPipe } from './puzzle-part.pipe';
 
 @NgModule({
   declarations: [
@@ -20,10 +23,13 @@ import { PuzzleSolver } from './puzzle-solver.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatIconModule,
     MatInputModule,
     MatToolbarModule,
     MatFormFieldModule,
     MatSelectModule,
+    PuzzlePipe,
+    PuzzlePartPipe
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: (solver: PuzzleSolver) => () => solver.initialize(), deps: [PuzzleSolver], multi: true }
