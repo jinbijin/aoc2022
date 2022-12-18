@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { calorie_counting, ParseContentsError, PuzzleInput, PuzzlePart, pyroclastic_flow, rock_paper_scissors } from 'advent-of-code-2022';
+import { PuzzleInput, PuzzlePart } from 'advent-of-code-2022';
+import { PuzzleConfigService } from './puzzle-config.service';
 
 type Solver = (input: PuzzleInput) => string;
 
@@ -10,13 +11,6 @@ type Solver = (input: PuzzleInput) => string;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  readonly puzzleOptions = [
-    { label: 'Day 1: Calorie Counting', solver: calorie_counting },
-  ];
-  readonly partOptions = [
-    { label: 'Part 1', part: PuzzlePart.Part1 },
-    { label: 'Part 2', part: PuzzlePart.Part2 },
-  ]
   readonly form = new FormGroup({
     puzzle: new FormControl<Solver | null>(null, {validators: [Validators.required]}),
     part: new FormControl<PuzzlePart | null>(null, {validators: [Validators.required]}),
@@ -25,7 +19,7 @@ export class AppComponent {
 
   last_solution: string | null = null;
 
-  constructor() { }
+  constructor(public readonly config: PuzzleConfigService) { }
 
   solve() {
     if (!this.form.valid) {

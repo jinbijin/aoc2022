@@ -8,13 +8,13 @@
 		<mat-form-field>
 			<mat-label>Select puzzle</mat-label>
 			<mat-select [formControl]="form.controls.puzzle">
-				<mat-option *ngFor="let puzzleOption of puzzleOptions" [value]="puzzleOption.solver">{{ puzzleOption.label }}</mat-option>
+				<mat-option *ngFor="let puzzle of config.puzzles" [value]="puzzle.solver">{{ puzzle.label }}</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<mat-form-field>
 			<mat-label>Select part</mat-label>
 			<mat-select [formControl]="form.controls.part">
-				<mat-option *ngFor="let partOption of partOptions" [value]="partOption.part">{{ partOption.label }}</mat-option>
+				<mat-option *ngFor="let part of config.parts" [value]="part.part">{{ part.label }}</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<mat-form-field class="full-size">
