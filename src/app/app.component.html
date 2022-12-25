@@ -1,40 +1,48 @@
 <header>
-<mat-toolbar>
-	<span>Advent of Code 2022 Solver</span>
-</mat-toolbar>
+  <mat-toolbar>
+    <span>Advent of Code 2022 Solver</span>
+  </mat-toolbar>
 </header>
 <main>
-	<form [formGroup]="form" class="form">
-		<mat-form-field>
-			<mat-label>Select puzzle</mat-label>
-			<mat-select [formControl]="form.controls.puzzle">
-				<mat-option *ngFor="let puzzle of config.puzzles" [value]="puzzle.solver">{{ puzzle.label }}</mat-option>
-			</mat-select>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>Select part</mat-label>
-			<mat-select [formControl]="form.controls.part">
-				<mat-option *ngFor="let part of config.parts" [value]="part.part">{{ part.label }}</mat-option>
-			</mat-select>
-		</mat-form-field>
-		<mat-form-field class="full-size">
-			<mat-label>Enter puzzle input</mat-label>
+  <form [formGroup]="form" class="form">
+    <mat-form-field>
+      <mat-label>Select puzzle</mat-label>
+      <mat-select [formControl]="form.controls.puzzle">
+        <mat-option
+          *ngFor="let puzzle of config.puzzles"
+          [value]="puzzle.solver"
+          >{{ puzzle.label }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select part</mat-label>
+      <mat-select [formControl]="form.controls.part">
+        <mat-option *ngFor="let part of config.parts" [value]="part.part">{{
+          part.label
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-size">
+      <mat-label>Enter puzzle input</mat-label>
       <textarea matInput [formControl]="form.controls.input"></textarea>
-		</mat-form-field>
-	</form>
+    </mat-form-field>
+  </form>
 </main>
 <footer>
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="solve()" aria-label="Solve">
-    <mat-icon>play_arrow</mat-icon>
-  </button>
-  <span *ngIf="solver.solverStatus$ | async as solverStatus">
-    <ng-container *ngIf="solverStatus.answer; else solving">
-      Answer to {{ solverStatus.solving.puzzle | puzzle }}, {{ solverStatus.solving.part | puzzlePart }}: {{ solverStatus.answer }}
-    </ng-container>
-    <ng-template #solving>
-      Solving {{ solverStatus.solving.puzzle | puzzle }}, {{ solverStatus.solving.part | puzzlePart }}...
-    </ng-template>
-  </span>
-</mat-toolbar>
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="solve()" aria-label="Solve">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    <span *ngIf="solver.solverStatus$ | async as solverStatus">
+      <ng-container *ngIf="solverStatus.answer; else solving">
+        Answer to {{ solverStatus.solving.puzzle | puzzle }},
+        {{ solverStatus.solving.part | puzzlePart }}: {{ solverStatus.answer }}
+      </ng-container>
+      <ng-template #solving>
+        Solving {{ solverStatus.solving.puzzle | puzzle }},
+        {{ solverStatus.solving.part | puzzlePart }}...
+      </ng-template>
+    </span>
+  </mat-toolbar>
 </footer>

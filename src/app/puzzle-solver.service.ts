@@ -1,18 +1,21 @@
-import { Injectable } from "@angular/core";
-import { ValidationErrors } from "@angular/forms";
-import { Observable, of, Subject, take } from "rxjs";
-import { FromWorkerMessage } from "./common/messages.type";
-import { SolveInputMessage } from "./common/solve-input-message.type";
-import { SolverStatusMessage } from "./common/solver-status-message.type";
-import { SolverValidationMessage } from "./common/solver-validation-message.type";
+import { Injectable } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
+import { Observable, of, Subject, take } from 'rxjs';
+import { FromWorkerMessage } from './common/messages.type';
+import { SolveInputMessage } from './common/solve-input-message.type';
+import { SolverStatusMessage } from './common/solver-status-message.type';
+import { SolverValidationMessage } from './common/solver-validation-message.type';
 
 @Injectable({ providedIn: 'root' })
 export class PuzzleSolver {
   #worker: Worker | null = null;
   readonly #solverStatus: Subject<SolverStatusMessage> = new Subject();
-  readonly solverStatus$: Observable<SolverStatusMessage> = this.#solverStatus.asObservable();
-  readonly #solverValidationErrors: Subject<ValidationErrors | null> = new Subject();
-  readonly solverValidationErrors$: Observable<ValidationErrors | null> = this.#solverValidationErrors.asObservable();
+  readonly solverStatus$: Observable<SolverStatusMessage> =
+    this.#solverStatus.asObservable();
+  readonly #solverValidationErrors: Subject<ValidationErrors | null> =
+    new Subject();
+  readonly solverValidationErrors$: Observable<ValidationErrors | null> =
+    this.#solverValidationErrors.asObservable();
 
   initialize(): void {
     if (typeof Worker !== 'undefined') {
@@ -34,14 +37,18 @@ export class PuzzleSolver {
     this.#worker?.postMessage(input);
   }
 
-  validate(input: SolverValidationMessage): Observable<ValidationErrors | null> {
+  validate(
+    input: SolverValidationMessage
+  ): Observable<ValidationErrors | null> {
     const worker = this.#worker;
     if (!worker) {
       return of(null);
     }
 
-    return new Observable(subscriber => {
-      const subscription = this.solverValidationErrors$.pipe(take(1)).subscribe(subscriber);
+    return new Observable((subscriber) => {
+      const subscription = this.solverValidationErrors$
+        .pipe(take(1))
+        .subscribe(subscriber);
       worker.postMessage(input);
       return subscription;
     });

@@ -11,7 +11,7 @@ addEventListener('message', ({ data }) => {
     const solvand: Solvand = {
       puzzle: message.puzzle,
       part: message.part,
-    }
+    };
     const startResponse: SolverStatusMessage = {
       type: 'solver_status',
       solving: solvand,
@@ -19,11 +19,13 @@ addEventListener('message', ({ data }) => {
     };
     postMessage(startResponse);
 
-    const answer: string = aoc2022[message.puzzle](new aoc2022.PuzzleInput(message.input, message.part));
+    const answer: string = aoc2022[message.puzzle](
+      new aoc2022.PuzzleInput(message.input, message.part)
+    );
     const endResponse: SolverStatusMessage = {
       type: 'solver_status',
       solving: solvand,
-      answer
+      answer,
     };
     postMessage(endResponse);
   }
@@ -33,13 +35,13 @@ addEventListener('message', ({ data }) => {
       const error = aoc2022[`${message.puzzle}_validate`](message.input);
       const response: SolverValidationResponseMessage = {
         type: 'validation-response',
-        error
+        error,
       };
       postMessage(response);
     } else {
       const response: SolverValidationResponseMessage = {
         type: 'validation-response',
-        error: null
+        error: null,
       };
       postMessage(response);
     }
