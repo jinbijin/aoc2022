@@ -10,10 +10,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { PuzzleSolver } from './puzzle-solver.service';
 import { PuzzlePipe } from './puzzle.pipe';
 import { PuzzlePartPipe } from './puzzle-part.pipe';
 import { CommonModule } from '@angular/common';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,9 +25,11 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatDialogModule,
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatFormFieldModule,
     MatSelectModule,
     PuzzlePipe,

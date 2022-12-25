@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Parsing errors</h1>
+<mat-dialog-content>
+  <mat-list *ngIf="errors.section_errors">
+    <mat-list-item *ngFor="let sectionError of errors.section_errors">
+      <span matListItemTitle>Section {{ sectionError.section + 1 }}</span>
+      <span matListItemLine
+        >starting at line {{ sectionError.first_line + 1 }}</span
+      >
+      <span
+        matListItemLine
+        *ngFor="let lineError of sectionError.error.line_errors ?? []"
+        >Line {{ lineError.line + 1 }}: {{ lineError.error }}</span
+      >
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>

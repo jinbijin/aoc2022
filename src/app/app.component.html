@@ -14,6 +14,7 @@
           >{{ puzzle.label }}</mat-option
         >
       </mat-select>
+      <mat-error>This field is required.</mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select part</mat-label>
@@ -22,20 +23,25 @@
           part.label
         }}</mat-option>
       </mat-select>
+      <mat-error>This field is required.</mat-error>
     </mat-form-field>
     <mat-form-field class="full-size">
       <mat-label>Enter puzzle input</mat-label>
       <textarea matInput [formControl]="form.controls.input"></textarea>
-      <mat-hint *ngIf="form.invalid && form.controls.puzzle.valid && form.controls.part.valid && form.controls.input.valid" class="error">
-        Errors found while parsing input.
-      </mat-hint>
+      <mat-error>This field is required.</mat-error>
     </mat-form-field>
   </form>
 </main>
 <footer>
   <mat-toolbar color="primary">
-    <button mat-icon-button (click)="solve()" aria-label="Solve">
-      <mat-icon>play_arrow</mat-icon>
+    <button
+      mat-icon-button
+      (click)="solve()"
+      [disabled]="!solveReady"
+      [matTooltip]="tooltip"
+      [attr.aria-label]="tooltip"
+    >
+      <mat-icon>{{ icon }}</mat-icon>
     </button>
     <span *ngIf="solver.solverStatus$ | async as solverStatus">
       <ng-container *ngIf="solverStatus.answer; else solving">
