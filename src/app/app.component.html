@@ -33,29 +33,31 @@
   </form>
 </main>
 <footer>
-  <mat-toolbar color="primary" class="toolbar">
+  <mat-toolbar
+    *ngIf="solver.solverStatus$ | async as solverStatus"
+    color="primary"
+    class="toolbar"
+  >
     <button
       mat-icon-button
       (click)="solve()"
-      [disabled]="!solveReady"
+      [disabled]="!solveReady || (solverStatus.solving && !solverStatus.answer)"
       [matTooltip]="tooltip"
       [attr.aria-label]="tooltip"
     >
       <mat-icon>{{ icon }}</mat-icon>
     </button>
     <span class="spacer"></span>
-    <ng-container *ngIf="solver.solverStatus$ | async as solverStatus">
-      <mat-spinner
-        *ngIf="solverStatus.solving && !solverStatus.answer"
-      ></mat-spinner>
-      <mat-form-field color="primary">
-        <mat-label>Answer</mat-label>
-        <input matInput [value]="solverStatus.answer" [readonly]="true" />
-        <mat-hint *ngIf="solverStatus.solving && solverStatus.answer"
-          >{{ solverStatus.solving.puzzle | puzzle }},
-          {{ solverStatus.solving.part | puzzlePart }}</mat-hint
-        >
-      </mat-form-field>
-    </ng-container>
+    <mat-spinner
+      *ngIf="solverStatus.solving && !solverStatus.answer"
+    ></mat-spinner>
+    <mat-form-field color="primary">
+      <mat-label>Answer</mat-label>
+      <input matInput [value]="solverStatus.answer" [readonly]="true" />
+      <mat-hint *ngIf="solverStatus.solving && solverStatus.answer"
+        >{{ solverStatus.solving.puzzle | puzzle }},
+        {{ solverStatus.solving.part | puzzlePart }}</mat-hint
+      >
+    </mat-form-field>
   </mat-toolbar>
 </footer>
