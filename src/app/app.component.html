@@ -26,6 +26,9 @@
     <mat-form-field class="full-size">
       <mat-label>Enter puzzle input</mat-label>
       <textarea matInput [formControl]="form.controls.input"></textarea>
+      <mat-hint *ngIf="form.invalid && form.controls.puzzle.valid && form.controls.part.valid && form.controls.input.valid" class="error">
+        Errors found while parsing input.
+      </mat-hint>
     </mat-form-field>
   </form>
 </main>

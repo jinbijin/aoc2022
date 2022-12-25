@@ -13,10 +13,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { PuzzleSolver } from './puzzle-solver.service';
 import { PuzzlePipe } from './puzzle.pipe';
 import { PuzzlePartPipe } from './puzzle-part.pipe';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
