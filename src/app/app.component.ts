@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import {
-  AbstractControl,
   AsyncValidatorFn,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { PuzzleInput, PuzzlePart } from 'advent-of-code-2022';
-import { tap } from 'rxjs';
+import { PuzzlePart } from 'advent-of-code-2022';
 import { Puzzle } from './common/puzzle.enum';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { PuzzleConfigService } from './puzzle-config.service';
