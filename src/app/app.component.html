@@ -33,7 +33,7 @@
   </form>
 </main>
 <footer>
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" class="toolbar">
     <button
       mat-icon-button
       (click)="solve()"
@@ -43,15 +43,20 @@
     >
       <mat-icon>{{ icon }}</mat-icon>
     </button>
-    <span *ngIf="solver.solverStatus$ | async as solverStatus">
-      <ng-container *ngIf="solverStatus.answer; else solving">
-        Answer to {{ solverStatus.solving.puzzle | puzzle }},
-        {{ solverStatus.solving.part | puzzlePart }}: {{ solverStatus.answer }}
-      </ng-container>
-      <ng-template #solving>
+    <span class="spacer"></span>
+    <ng-container *ngIf="solver.solverStatus$ | async as solverStatus">
+      <span *ngIf="solverStatus.solving && !solverStatus.answer">
         Solving {{ solverStatus.solving.puzzle | puzzle }},
         {{ solverStatus.solving.part | puzzlePart }}...
-      </ng-template>
-    </span>
+      </span>
+      <mat-form-field color="primary">
+        <mat-label>Answer</mat-label>
+        <input matInput [value]="solverStatus.answer" [readonly]="true" />
+        <mat-hint *ngIf="solverStatus.solving && solverStatus.answer"
+          >{{ solverStatus.solving.puzzle | puzzle }},
+          {{ solverStatus.solving.part | puzzlePart }}</mat-hint
+        >
+      </mat-form-field>
+    </ng-container>
   </mat-toolbar>
 </footer>

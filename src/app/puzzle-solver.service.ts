@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { Observable, of, Subject, take } from 'rxjs';
+import { Observable, of, startWith, Subject, take } from 'rxjs';
 import { FromWorkerMessage } from './common/messages.type';
 import { SolveInputMessage } from './common/solve-input-message.type';
 import { SolverStatusMessage } from './common/solver-status-message.type';
@@ -10,8 +10,11 @@ import { SolverValidationMessage } from './common/solver-validation-message.type
 export class PuzzleSolver {
   #worker: Worker | null = null;
   readonly #solverStatus: Subject<SolverStatusMessage> = new Subject();
-  readonly solverStatus$: Observable<SolverStatusMessage> =
-    this.#solverStatus.asObservable();
+  readonly solverStatus$: Observable<SolverStatusMessage> = this.#solverStatus
+    .asObservable()
+    .pipe(
+      startWith({ type: 'solver_status', solving: null, answer: null } as const)
+    );
   readonly #solverValidationErrors: Subject<ValidationErrors | null> =
     new Subject();
   readonly solverValidationErrors$: Observable<ValidationErrors | null> =

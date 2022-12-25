@@ -1,5 +1,5 @@
 main {
-  height: calc(100vh - 64px - 64px);
+  height: calc(100vh - 64px - 96px);
 }
 
 .form {
@@ -10,13 +10,21 @@ main {
 
 .full-size {
   grid-column: 1 / span 2;
-  height: calc(100vh - 64px - 78px - 64px);
+  height: calc(100vh - 64px - 78px - 96px);
 
   textarea {
-    height: calc(100vh - 64px - 78px - 64px - 64px);
+    height: calc(100vh - 64px - 78px - 96px - 64px);
   }
 }
 
 .error {
   color: #f44336;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar {
+  height: 96px;
 }
