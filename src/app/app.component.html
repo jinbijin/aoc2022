@@ -45,10 +45,9 @@
     </button>
     <span class="spacer"></span>
     <ng-container *ngIf="solver.solverStatus$ | async as solverStatus">
-      <span *ngIf="solverStatus.solving && !solverStatus.answer">
-        Solving {{ solverStatus.solving.puzzle | puzzle }},
-        {{ solverStatus.solving.part | puzzlePart }}...
-      </span>
+      <mat-spinner
+        *ngIf="solverStatus.solving && !solverStatus.answer"
+      ></mat-spinner>
       <mat-form-field color="primary">
         <mat-label>Answer</mat-label>
         <input matInput [value]="solverStatus.answer" [readonly]="true" />
