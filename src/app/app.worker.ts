@@ -31,7 +31,10 @@ addEventListener('message', ({ data }) => {
   }
 
   if (message.type === 'solver-validation') {
-    if (message.puzzle === Puzzle.CalorieCounting) {
+    if (
+      message.puzzle === Puzzle.CalorieCounting ||
+      message.puzzle === Puzzle.RockPaperScissors
+    ) {
       const error = aoc2022[`${message.puzzle}_validate`](message.input);
       const response: SolverValidationResponseMessage = {
         type: 'validation-response',
