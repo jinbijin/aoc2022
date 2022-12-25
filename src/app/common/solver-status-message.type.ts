@@ -1,7 +1,7 @@
-import { Puzzle } from "./puzzle.enum";
 import { Solvand } from "./solvand.type";
 
-export interface SolverStatus {
+export interface SolverStatusMessage {
+  type: 'solver_status',
   solving: Solvand,
   answer: string | null,
 }

@@ -1,24 +1,47 @@
 import * as aoc2022 from 'advent-of-code-2022';
+import { ToWorkerMessage } from './common/messages.type';
+import { Puzzle } from './common/puzzle.enum';
 import { Solvand } from './common/solvand.type';
-import { SolverInput } from './common/solver-input.type';
-import { SolverStatus } from './common/solver-status.type';
+import { SolverStatusMessage } from './common/solver-status-message.type';
+import { SolverValidationResponseMessage } from './common/solver-validation-response-message.type';
 
 addEventListener('message', ({ data }) => {
-  const input = data as SolverInput;
-  const solvand: Solvand = {
-    puzzle: input.puzzle,
-    part: input.part,
-  }
-  const startResponse: SolverStatus = {
-    solving: solvand,
-    answer: null,
-  };
-  postMessage(startResponse);
+  const message = data as ToWorkerMessage;
+  if (message.type === 'solve-input') {
+    const solvand: Solvand = {
+      puzzle: message.puzzle,
+      part: message.part,
+    }
+    const startResponse: SolverStatusMessage = {
+      type: 'solver_status',
+      solving: solvand,
+      answer: null,
+    };
+    postMessage(startResponse);
 
-  const answer: string = aoc2022[input.puzzle](new aoc2022.PuzzleInput(input.input, input.part));
-  const endResponse: SolverStatus = {
-    solving: solvand,
-    answer
-  };
-  postMessage(endResponse);
+    const answer: string = aoc2022[message.puzzle](new aoc2022.PuzzleInput(message.input, message.part));
+    const endResponse: SolverStatusMessage = {
+      type: 'solver_status',
+      solving: solvand,
+      answer
+    };
+    postMessage(endResponse);
+  }
+
+  if (message.type === 'solver-validation') {
+    if (message.puzzle === Puzzle.CalorieCounting) {
+      const error = aoc2022[`${message.puzzle}_validate`](message.input);
+      const response: SolverValidationResponseMessage = {
+        type: 'validation-response',
+        error
+      };
+      postMessage(response);
+    } else {
+      const response: SolverValidationResponseMessage = {
+        type: 'validation-response',
+        error: null
+      };
+      postMessage(response);
+    }
+  }
 });
