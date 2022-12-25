@@ -23,6 +23,13 @@ export class PuzzleConfigService {
     { label: 'Day 16: Proboscidea Volcanium', solver: Puzzle.ProboscideaVolcanium },
     { label: 'Day 17: Pyroclastic Flow', solver: Puzzle.PyroclasticFlow },
     { label: 'Day 18: Boiling Boulders', solver: Puzzle.BoilingBoulders },
+    { label: 'Day 19: Not Enough Minerals', solver: Puzzle.NotEnoughMinerals },
+    { label: 'Day 20: Grove Positioning System', solver: Puzzle.GrovePositioningSystem },
+    { label: 'Day 21: Monkey Math', solver: Puzzle.MonkeyMath },
+    { label: 'Day 22: Monkey Map', solver: Puzzle.MonkeyMap },
+    { label: 'Day 23: Unstable Diffusion', solver: Puzzle.UnstableDiffusion },
+    { label: 'Day 24: Blizzard Basin', solver: Puzzle.BlizzardBasin },
+    { label: 'Day 25: Full of Hot Air', solver: Puzzle.FullOfHotAir },
   ];
   readonly parts = [
     { label: 'Part 1', part: PuzzlePart.Part1 },

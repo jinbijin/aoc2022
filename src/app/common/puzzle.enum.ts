@@ -17,4 +17,11 @@ export const enum Puzzle {
   ProboscideaVolcanium = "proboscidea_volcanium",
   PyroclasticFlow = "pyroclastic_flow",
   BoilingBoulders = "boiling_boulders",
+  NotEnoughMinerals = "not_enough_minerals",
+  GrovePositioningSystem = "grove_positioning_system",
+  MonkeyMath = "monkey_math",
+  MonkeyMap = "monkey_map",
+  UnstableDiffusion = "unstable_diffusion",
+  BlizzardBasin = "blizzard_basin",
+  FullOfHotAir = "full_of_hot_air",
 }
