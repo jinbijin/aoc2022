@@ -50,8 +50,10 @@
     <span class="spacer"></span>
     <mat-spinner
       *ngIf="solverStatus.solving && !solverStatus.answer"
+      [diameter]="64"
+      color="accent"
     ></mat-spinner>
-    <mat-form-field color="primary">
+    <mat-form-field color="primary" class="answer-field">
       <mat-label>Answer</mat-label>
       <input matInput [value]="solverStatus.answer" [readonly]="true" />
       <mat-hint *ngIf="solverStatus.solving && solverStatus.answer"
