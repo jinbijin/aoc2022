@@ -1,16 +1,29 @@
 <h1 mat-dialog-title>Parsing errors</h1>
 <mat-dialog-content>
-  <mat-list *ngIf="errors.section_errors">
-    <mat-list-item *ngFor="let sectionError of errors.section_errors">
-      <span matListItemTitle>Section {{ sectionError.section + 1 }}</span>
-      <span matListItemLine
-        >starting at line {{ sectionError.first_line + 1 }}</span
+  <mat-tree
+    [dataSource]="dataSource"
+    [treeControl]="treeControl"
+    class="error-tree"
+  >
+    <mat-tree-node *matTreeNodeDef="let node">
+      {{ node | errorMessage }}
+    </mat-tree-node>
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChildren">
+      <div class="mat-tree-node">
+        <button mat-icon-button matTreeNodeToggle aria-label="Toggle">
+          <mat-icon>
+            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+          </mat-icon>
+        </button>
+        {{ node | errorMessage }}
+      </div>
+
+      <div
+        [class.cdk-visually-hidden]="!treeControl.isExpanded(node)"
+        role="group"
       >
-      <span
-        matListItemLine
-        *ngFor="let lineError of sectionError.error.line_errors ?? []"
-        >Line {{ lineError.line + 1 }}: {{ lineError.error }}</span
-      >
-    </mat-list-item>
-  </mat-list>
+        <ng-container matTreeNodeOutlet></ng-container>
+      </div>
+    </mat-nested-tree-node>
+  </mat-tree>
 </mat-dialog-content>
