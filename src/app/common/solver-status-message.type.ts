@@ -4,4 +4,5 @@ export interface SolverStatusMessage {
   type: 'solver_status';
   solving: Solvand | null;
   answer: string | null;
+  duration: number | null;
 }

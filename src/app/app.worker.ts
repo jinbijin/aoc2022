@@ -16,16 +16,26 @@ addEventListener('message', ({ data }) => {
       type: 'solver_status',
       solving: solvand,
       answer: null,
+      duration: null,
     };
     postMessage(startResponse);
 
+    performance.mark('solve-started');
     const answer: string = aoc2022[message.puzzle](
       new aoc2022.PuzzleInput(message.input, message.part)
     );
+    performance.mark('solve-finished');
+    const measure = performance.measure(
+      'solve',
+      'solve-started',
+      'solve-finished'
+    );
+
     const endResponse: SolverStatusMessage = {
       type: 'solver_status',
       solving: solvand,
       answer,
+      duration: measure.duration,
     };
     postMessage(endResponse);
   }

@@ -13,7 +13,12 @@ export class PuzzleSolver {
   readonly solverStatus$: Observable<SolverStatusMessage> = this.#solverStatus
     .asObservable()
     .pipe(
-      startWith({ type: 'solver_status', solving: null, answer: null } as const)
+      startWith({
+        type: 'solver_status',
+        solving: null,
+        answer: null,
+        duration: null,
+      } as const)
     );
   readonly #solverValidationErrors: Subject<ValidationErrors | null> =
     new Subject();
