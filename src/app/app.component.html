@@ -65,7 +65,7 @@
         [readonly]="true"
         class="code-input"
       />
-      <mat-hint *ngIf="solverStatus.duration"
+      <mat-hint *ngIf="solverStatus.answer"
         >Completed in
         {{ solverStatus.duration | number : "1.0-0" }} ms</mat-hint
       >
