@@ -27,7 +27,11 @@
     </mat-form-field>
     <mat-form-field class="full-size">
       <mat-label>Enter puzzle input</mat-label>
-      <textarea matInput [formControl]="form.controls.input"></textarea>
+      <textarea
+        matInput
+        [formControl]="form.controls.input"
+        class="code-input"
+      ></textarea>
       <mat-error>This field is required.</mat-error>
     </mat-form-field>
   </form>
@@ -55,7 +59,12 @@
     ></mat-spinner>
     <mat-form-field color="primary" class="answer-field">
       <mat-label>Answer</mat-label>
-      <input matInput [value]="solverStatus.answer" [readonly]="true" />
+      <input
+        matInput
+        [value]="solverStatus.answer"
+        [readonly]="true"
+        class="code-input"
+      />
       <mat-hint *ngIf="solverStatus.duration"
         >Completed in
         {{ solverStatus.duration | number : "1.0-0" }} ms</mat-hint
